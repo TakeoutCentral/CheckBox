@@ -47,32 +47,32 @@
     [self.checkBox.tintColor getRed:&red green:&green blue:&blue alpha:&alpha];
     self.tintColorPropertyLabel.text = [NSString stringWithFormat:@"R:%.0f - G:%.0f - B:%.0f", red * 255.0, green * 255.0, blue * 255.0];
     
-    self.boxTypePropertyValueLabel.text = self.checkBox.boxType ? @"BEMBoxTypeSquare" : @"BEMBoxTypeCircle";
+    self.boxTypePropertyValueLabel.text = self.checkBox.boxType ? @"BoxTypeSquare" : @"BoxTypeCircle";
     self.onAnimationTypePropertyValueLabel.text = [self stringForAnimationType:self.checkBox.onAnimationType];
     self.offAnimationTypePropertyValueLabel.text = [self stringForAnimationType:self.checkBox.offAnimationType];
 }
 
 #pragma mark Helper Methods
-- (NSString *)stringForAnimationType:(BEMAnimationType)animationType {
+- (NSString *)stringForAnimationType:(AnimationType)animationType {
     switch (animationType) {
-        case BEMAnimationTypeBounce:
-            return @"BEMAnimationTypeBounce";
+        case AnimationTypeBounce:
+            return @"AnimationTypeBounce";
             break;
-        case BEMAnimationTypeFill:
-            return @"BEMAnimationTypeFill";
+        case AnimationTypeFill:
+            return @"AnimationTypeFill";
             break;
-        case BEMAnimationTypeFlat:
-            return @"BEMAnimationTypeFlat";
+        case AnimationTypeFlat:
+            return @"AnimationTypeFlat";
             break;
-        case BEMAnimationTypeOneStroke:
-            return @"BEMAnimationTypeOneStroke";
+        case AnimationTypeOneStroke:
+            return @"AnimationTypeOneStroke";
             break;
-        case BEMAnimationTypeStroke:
-            return @"BEMAnimationTypeStroke";
+        case AnimationTypeStroke:
+            return @"AnimationTypeStroke";
             break;
             
         default:
-            return @"BEMAnimationTypeFade";
+            return @"AnimationTypeFade";
             break;
     }
 }

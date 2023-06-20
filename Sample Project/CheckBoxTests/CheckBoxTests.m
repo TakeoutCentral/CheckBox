@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import <BEMCheckBox/BEMCheckBox-Swift.h>
+#import <CheckBox/CheckBox-Swift.h>
 
 @interface CheckBoxTests : XCTestCase
 
-@property (strong, nonatomic) BEMCheckBox *checkBox;
+@property (strong, nonatomic) CheckBox *checkBox;
 
 @end
 
@@ -21,7 +21,7 @@
 - (void)setUp {
     [super setUp];
     
-    self.checkBox = [BEMCheckBox new];
+    self.checkBox = [CheckBox new];
 }
 
 - (void)tearDown {
@@ -43,8 +43,8 @@
     XCTAssert([self.checkBox.tintColor isEqual:[UIColor lightGrayColor]], @"Default tint color");
     XCTAssert(self.checkBox.lineWidth == 2.0, @"Default line width should be 2.0");
     XCTAssert(self.checkBox.animationDuration == 0.5, @"Default animation duration should be 0.5");
-    XCTAssert(self.checkBox.onAnimationType == BEMAnimationTypeStroke, @"Default on animation should be of type stroke");
-    XCTAssert(self.checkBox.offAnimationType == BEMAnimationTypeStroke, @"Default off animation should be of type stroke");
+    XCTAssert(self.checkBox.onAnimationType == AnimationTypeStroke, @"Default on animation should be of type stroke");
+    XCTAssert(self.checkBox.offAnimationType == AnimationTypeStroke, @"Default off animation should be of type stroke");
     XCTAssert([self.checkBox.backgroundColor isEqual:[UIColor clearColor]], @"Background color should be transparent");
 }
 

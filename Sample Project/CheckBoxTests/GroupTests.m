@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import <BEMCheckBox/BEMCheckBox-Swift.h>
+#import <CheckBox/CheckBox-Swift.h>
 
 @interface GroupTests : XCTestCase
 
-@property (strong, nonatomic) NSArray <BEMCheckBox *> *checkBoxes;
+@property (strong, nonatomic) NSArray <CheckBox *> *checkBoxes;
 
 @end
 
@@ -21,20 +21,20 @@
 - (void)setUp {
     [super setUp];
     
-    NSMutableArray <BEMCheckBox *> *checkBoxes = [NSMutableArray new];
+    NSMutableArray <CheckBox *> *checkBoxes = [NSMutableArray new];
     
     for (NSInteger i = 0; i < 5; i++) {
-        [checkBoxes addObject:[BEMCheckBox new]];
+        [checkBoxes addObject:[CheckBox new]];
     }
     self.checkBoxes = [NSArray arrayWithArray:checkBoxes];
 }
 
 - (void)testSelectedCheckBox {
-    BEMCheckBoxGroup *group = [[BEMCheckBoxGroup alloc] initWithCheckBoxes:self.checkBoxes];
+    CheckBoxGroup *group = [[CheckBoxGroup alloc] initWithCheckBoxes:self.checkBoxes];
     XCTAssertNotNil(group);
     XCTAssertNil(group.selectedCheckBox);
     
-    group.selectedCheckBox = [BEMCheckBox new];
+    group.selectedCheckBox = [CheckBox new];
     XCTAssertNil(group.selectedCheckBox);
     XCTAssertEqual([self selectedCheckBoxForGroup:group], group.selectedCheckBox);
     XCTAssertEqual([self numberOfSelectedCheckBoxesForGroup:group], 0);
@@ -61,7 +61,7 @@
 }
 
 - (void)testAutoSelectFirstCheckBox {
-    BEMCheckBoxGroup *group = [[BEMCheckBoxGroup alloc] initWithCheckBoxes:self.checkBoxes];
+    CheckBoxGroup *group = [[CheckBoxGroup alloc] initWithCheckBoxes:self.checkBoxes];
     XCTAssertNotNil(group);
     XCTAssertNil(group.selectedCheckBox);
     
@@ -73,18 +73,18 @@
 }
 
 - (void)testAddCheckBox {
-    BEMCheckBoxGroup *group = [[BEMCheckBoxGroup alloc] initWithCheckBoxes:self.checkBoxes];
+    CheckBoxGroup *group = [[CheckBoxGroup alloc] initWithCheckBoxes:self.checkBoxes];
     XCTAssertNotNil(group);
     XCTAssertEqual(group.checkBoxes.count, self.checkBoxes.count);
     
-    BEMCheckBox *checkBox = [BEMCheckBox new];
+    CheckBox *checkBox = [CheckBox new];
     [group addCheckBoxToGroup:checkBox];
 
     XCTAssertEqual(group.checkBoxes.count, self.checkBoxes.count + 1);
 }
 
 - (void)testRemoveCheckBox {
-    BEMCheckBoxGroup *group = [[BEMCheckBoxGroup alloc] initWithCheckBoxes:self.checkBoxes];
+    CheckBoxGroup *group = [[CheckBoxGroup alloc] initWithCheckBoxes:self.checkBoxes];
     XCTAssertNotNil(group);
     XCTAssertEqual(group.checkBoxes.count, self.checkBoxes.count);
     
@@ -93,25 +93,25 @@
 }
 
 - (void)testEmptyGroup {
-    BEMCheckBoxGroup *emptyGroup = [[BEMCheckBoxGroup alloc] initWithCheckBoxes: @[]];
+    CheckBoxGroup *emptyGroup = [[CheckBoxGroup alloc] initWithCheckBoxes: @[]];
     XCTAssertNotNil(emptyGroup);
     XCTAssertEqual(emptyGroup.checkBoxes.count, 0);
     
-    [emptyGroup removeCheckBoxFromGroup:[BEMCheckBox new]];
+    [emptyGroup removeCheckBoxFromGroup:[CheckBox new]];
     XCTAssertEqual(emptyGroup.checkBoxes.count, 0);
     
     emptyGroup.mustHaveSelection = YES;
     XCTAssertEqual(emptyGroup.checkBoxes.count, 0);
     
-    [emptyGroup addCheckBoxToGroup:[BEMCheckBox new]];
+    [emptyGroup addCheckBoxToGroup:[CheckBox new]];
     XCTAssertEqual(emptyGroup.checkBoxes.count, 1);
 }
 
 #pragma mark Helper Methods
 
-- (NSInteger)numberOfSelectedCheckBoxesForGroup:(BEMCheckBoxGroup *)group {
+- (NSInteger)numberOfSelectedCheckBoxesForGroup:(CheckBoxGroup *)group {
     NSInteger numberOfSelectedCheckBoxes = 0;
-    for (BEMCheckBox *checkBox in group.checkBoxes) {
+    for (CheckBox *checkBox in group.checkBoxes) {
         if (checkBox.on == YES) {
             numberOfSelectedCheckBoxes++;
         }
@@ -120,8 +120,8 @@
     return numberOfSelectedCheckBoxes;
 }
 
-- (BEMCheckBox *)selectedCheckBoxForGroup:(BEMCheckBoxGroup *)group {
-    for (BEMCheckBox *checkBox in group.checkBoxes) {
+- (CheckBox *)selectedCheckBoxForGroup:(CheckBoxGroup *)group {
+    for (CheckBox *checkBox in group.checkBoxes) {
         if (checkBox.on == YES) {
             return checkBox;
         }

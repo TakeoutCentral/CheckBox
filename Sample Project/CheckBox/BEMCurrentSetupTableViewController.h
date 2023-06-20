@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@import BEMCheckBox;
+@import CheckBox;
 
 @interface BEMCurrentSetupTableViewController : UITableViewController
 
-@property (strong, nonatomic) BEMCheckBox *checkBox;
+@property (strong, nonatomic) CheckBox *checkBox;
 
 @end

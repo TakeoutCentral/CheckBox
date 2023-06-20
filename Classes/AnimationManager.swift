@@ -1,5 +1,5 @@
 //
-//  BEMAnimationManager.swift
+//  AnimationManager.swift
 //  CheckBox
 //
 //  Created by Bobo on 9/19/15.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-public final class BEMAnimationManager: NSObject {
-    /** The duration of the animation created by the `BEMAnimationManager` object. */
+public final class AnimationManager: NSObject {
+    /** The duration of the animation created by the `AnimationManager` object. */
     @objc public var animationDuration: CFTimeInterval = 0.0
     
     /** Designated initializer.
-     * @param animationDuration The duration of the animations created with the `BEMAnimationManager` object.
-     * @return Returns the a fully initialized `BEMAnimationManager` object.
+     * @param animationDuration The duration of the animations created with the `AnimationManager` object.
+     * @return Returns the a fully initialized `AnimationManager` object.
      */
     @objc public init(animationDuration: CFTimeInterval) {
         super.init()

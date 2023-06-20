@@ -2,14 +2,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "BEMCheckBox",
+    name: "CheckBox",
     platforms: [
        .iOS(.v8)
     ],
     products: [
-        .library(name: "BEMCheckBox", targets: ["BEMCheckBox"])
+        .library(name: "CheckBox", targets: ["CheckBox"])
     ],
     targets: [
-        .target(name: "BEMCheckBox", dependencies: [], path: "Classes")
+        .target(name: "CheckBox", dependencies: [], path: "Classes")
     ]
 )

@@ -11,7 +11,7 @@
 
 @interface BEMMainViewController ()
 
-@property (strong, nonatomic) IBOutlet BEMCheckBox *checkBox;
+@property (strong, nonatomic) IBOutlet CheckBox *checkBox;
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *drawTypeSegmentedControl;
 
@@ -25,8 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.checkBox.onAnimationType = BEMAnimationTypeBounce;
-    self.checkBox.offAnimationType = BEMAnimationTypeBounce;
+    self.checkBox.onAnimationType = AnimationTypeBounce;
+    self.checkBox.offAnimationType = AnimationTypeBounce;
     
     self.animationButton.layer.cornerRadius = 5.0;
     self.animationButton.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -49,7 +49,7 @@
 }
 
 - (IBAction)didTapOnBoxTypeSegmentedControl:(UISegmentedControl *)segmentedControl {
-    self.checkBox.boxType = (segmentedControl.selectedSegmentIndex == 0) ?BEMBoxTypeCircle : BEMBoxTypeSquare;
+    self.checkBox.boxType = (segmentedControl.selectedSegmentIndex == 0) ?BoxTypeCircle : BoxTypeSquare;
 }
 
 - (IBAction)didTapOnDrawTypeSegmentedControl:(UISegmentedControl *)segmentedControl {
@@ -71,15 +71,15 @@
 }
 
 #pragma mark BEMAnimationsTableViewDelegate
-- (void)didSelectAnimationType:(BEMAnimationType)animationType {
+- (void)didSelectAnimationType:(AnimationType)animationType {
     self.checkBox.onAnimationType = animationType;
     self.checkBox.offAnimationType = animationType;
     
-    if (animationType == BEMAnimationTypeStroke || animationType == BEMAnimationTypeOneStroke) {
+    if (animationType == AnimationTypeStroke || animationType == AnimationTypeOneStroke) {
         self.drawTypeSegmentedControl.selectedSegmentIndex = 0;
         [self.drawTypeSegmentedControl sendActionsForControlEvents:UIControlEventValueChanged];
         self.drawTypeSegmentedControl.enabled = NO;
-    } else if (animationType == BEMAnimationTypeFill) {
+    } else if (animationType == AnimationTypeFill) {
         self.drawTypeSegmentedControl.selectedSegmentIndex = 1;
         [self.drawTypeSegmentedControl sendActionsForControlEvents:UIControlEventValueChanged];
         self.drawTypeSegmentedControl.enabled = NO;

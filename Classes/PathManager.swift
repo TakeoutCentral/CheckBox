@@ -1,5 +1,5 @@
 //
-//  BEMPathManager.swift
+//  PathManager.swift
 //  CheckBox
 //
 //  Created by Bobo on 9/19/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class BEMPathManager: NSObject {
+final class PathManager: NSObject {
     /** The paths are assumed to be created in squares.
      * This is the size of width, or height, of the paths that will be created.
      */
@@ -17,14 +17,14 @@ final class BEMPathManager: NSObject {
     /** The width of the lines on the created paths. */
     var lineWidth: CGFloat = 0.0
     
-    /** The corner radius of the path when the boxType is BEMBoxTypeSquare. */
+    /** The corner radius of the path when the boxType is BoxTypeSquare. */
     var cornerRadius: CGFloat = 0.0
     
     /** The type of box.
      * Depending on the box type, paths may be created differently
-     * @see BEMBoxType
+     * @see BoxType
      */
-    var boxType: BEMCheckBox.BoxType = .circle
+    var boxType: CheckBox.BoxType = .circle
     
     /** Returns a UIBezierPath object for the box of the checkbox
      * @returns The path of the box.
@@ -100,7 +100,7 @@ final class BEMPathManager: NSObject {
     }
     
     /** Returns a UIBezierPath object for the flat checkmark of the checkbox
-     * @see BEMAnimationTypeFlat
+     * @see AnimationTypeFlat
      * @returns The path of the flat checkmark.
      */
     func pathForFlatCheckMark() -> UIBezierPath {

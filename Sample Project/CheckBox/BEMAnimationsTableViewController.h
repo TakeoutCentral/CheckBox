@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@import BEMCheckBox;
+@import CheckBox;
 
 @protocol BEMAnimationsTableViewDelegate <NSObject>
 
 @required
-- (void)didSelectAnimationType:(BEMAnimationType)animationType;
+- (void)didSelectAnimationType:(AnimationType)animationType;
 
 @end
 
@@ -20,6 +20,6 @@
 
 @property (weak, nonatomic) id delegate;
 
-@property (nonatomic) BEMAnimationType selectedAnimation;
+@property (nonatomic) AnimationType selectedAnimation;
 
 @end

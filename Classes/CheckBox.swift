@@ -1,5 +1,5 @@
 //
-//  BEMCheckBox.swift
+//  CheckBox.swift
 //  CheckBox
 //
 //  Created by Bobo on 9/19/15.
@@ -8,29 +8,29 @@
 
 import UIKit
 
-/** The BEMCheckBoxDelegate protocol. Used to receive life cycle events. */
-@objc public protocol BEMCheckBoxDelegate: NSObjectProtocol {
+/** The CheckBoxDelegate protocol. Used to receive life cycle events. */
+@objc public protocol CheckBoxDelegate: NSObjectProtocol {
     /** Sent to the delegate every time the check box gets tapped.
      * @discussion This method gets triggered after the properties are updated (on), but before the animations, if any, are completed.
      * @seealso animationDidStopForCheckBox:
-     * @param checkBox The BEMCheckBox instance that has been tapped.
+     * @param checkBox The CheckBox instance that has been tapped.
      */
-    @objc optional func didTap(_ checkBox: BEMCheckBox)
+    @objc optional func didTap(_ checkBox: CheckBox)
     
     /** Sent to the delegate every time the check box finishes being animated.
      * @discussion This method gets triggered after the properties are updated (on), and after the animations are completed. It won't be triggered if no animations are started.
      * @seealso didTapCheckBox:
-     * @param checkBox The BEMCheckBox instance that was animated.
+     * @param checkBox The CheckBox instance that was animated.
      */
-    @objc optional func animationDidStop(for checkBox: BEMCheckBox)
+    @objc optional func animationDidStop(for checkBox: CheckBox)
 }
 
 /** Tasteful Checkbox for iOS. */
 @IBDesignable
 @objc
-public class BEMCheckBox: UIControl, CAAnimationDelegate {
+public class CheckBox: UIControl, CAAnimationDelegate {
     
-    @objc(BEMBoxType)
+    @objc(BoxType)
     public enum BoxType : Int {
         /** Circled box. */
         case circle
@@ -39,7 +39,7 @@ public class BEMCheckBox: UIControl, CAAnimationDelegate {
         case square
     }
     
-    @objc(BEMAnimationType)
+    @objc(AnimationType)
     public enum AnimationType : Int {
         /** Animates the box and the check as if they were drawn.
          *  Should be used with a clear colored `onFillColor` property. */
@@ -65,11 +65,11 @@ public class BEMCheckBox: UIControl, CAAnimationDelegate {
     }
     
     /** The object that acts as the delegate of the receiving check box.
-    * @discussion The delegate must adopt the \p BEMCheckBoxDelegate protocol. The delegate is not retained.
+    * @discussion The delegate must adopt the \p CheckBoxDelegate protocol. The delegate is not retained.
      */
-    @objc @IBOutlet weak public var delegate: BEMCheckBoxDelegate?
+    @objc @IBOutlet weak public var delegate: CheckBoxDelegate?
     
-    /** This property allows you to retrieve and set (without animation) a value determining whether the BEMCheckBox object is On or Off.
+    /** This property allows you to retrieve and set (without animation) a value determining whether the CheckBox object is On or Off.
       * Default to NO.
      */
     @objc @IBInspectable public var on: Bool {
@@ -146,16 +146,16 @@ public class BEMCheckBox: UIControl, CAAnimationDelegate {
     /** The layer where the check mark is drawn when the check box is set to On. */
     private var checkMarkLayer: CAShapeLayer?
     
-    /** The BEMAnimationManager object used to generate animations. */
-    private lazy var animationManager: BEMAnimationManager = {
-        let animationManager = BEMAnimationManager(animationDuration: animationDuration)
+    /** The AnimationManager object used to generate animations. */
+    private lazy var animationManager: AnimationManager = {
+        let animationManager = AnimationManager(animationDuration: animationDuration)
         return animationManager
     }()
 
 
-    /** The BEMPathManager object used to generate paths. */
-    private lazy var pathManager: BEMPathManager = {
-        let pathManager = BEMPathManager()
+    /** The PathManager object used to generate paths. */
+    private lazy var pathManager: PathManager = {
+        let pathManager = PathManager()
         pathManager.lineWidth = lineWidth
         pathManager.cornerRadius = cornerRadius
         pathManager.boxType = boxType
@@ -164,17 +164,17 @@ public class BEMCheckBox: UIControl, CAAnimationDelegate {
     }()
     
     /** The group this box is associated with. */
-    @objc public var group: BEMCheckBoxGroup?
+    @objc public var group: CheckBoxGroup?
     
     /** The animation type when the check mark gets set to On.
      * @warning Some animations might not look as intended if the different colors of the control are not appropriatly configured.
-     * @see BEMAnimationType.
+     * @see AnimationType.
      */
     @objc public var onAnimationType: AnimationType = .stroke
     
     /** The animation type when the check mark gets set to Off.
      * @warning Some animations might not look as intended if the different colors of the control are not appropriatly configured.
-     * @see BEMAnimationType.
+     * @see AnimationType.
      */
     @objc public var offAnimationType: AnimationType = .stroke
     
@@ -262,7 +262,7 @@ public class BEMCheckBox: UIControl, CAAnimationDelegate {
         }
 
         setOn(!on, animated: true)
-        if delegate?.responds(to: #selector(BEMCheckBoxDelegate.didTap(_:))) == true {
+        if delegate?.responds(to: #selector(CheckBoxDelegate.didTap(_:))) == true {
             delegate?.didTap?(self)
         }
         sendActions(for: .valueChanged)
@@ -570,7 +570,7 @@ public class BEMCheckBox: UIControl, CAAnimationDelegate {
             checkMarkLayer = nil
         }
         
-        if delegate?.responds(to: #selector(BEMCheckBoxDelegate.animationDidStop(for:))) == true {
+        if delegate?.responds(to: #selector(CheckBoxDelegate.animationDidStop(for:))) == true {
             delegate?.animationDidStop?(for: self)
         }
     }

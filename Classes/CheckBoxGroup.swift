@@ -1,5 +1,5 @@
 //
-//  BEMCheckBoxGroup.swift
+//  CheckBoxGroup.swift
 //  CheckBox
 //
 //  Created by Bobo on 9/19/15.
@@ -9,16 +9,16 @@
 import UIKit
 
 @objc
-public class BEMCheckBoxGroup: NSObject {
+public class CheckBoxGroup: NSObject {
     /** An array of check boxes in this group.
      */
-    @objc public private(set) var checkBoxes = NSHashTable<BEMCheckBox>(options: .weakMemory)
+    @objc public private(set) var checkBoxes = NSHashTable<CheckBox>(options: .weakMemory)
     
     /** The currently selected check box. Only can be nil if mustHaveSelection is NO. Setting this value will cause the other check boxes to deselect automatically.
      */
-    @objc public var selectedCheckBox: BEMCheckBox? {
+    @objc public var selectedCheckBox: CheckBox? {
         get {
-            var selected: BEMCheckBox? = nil
+            var selected: CheckBox? = nil
             
             for checkBox in checkBoxes.allObjects {
                 if checkBox.on {
@@ -71,7 +71,7 @@ public class BEMCheckBoxGroup: NSObject {
     
     /** Creates a new group with the list of check boxes.
      */
-    @objc convenience public init(checkBoxes: [BEMCheckBox]) {
+    @objc convenience public init(checkBoxes: [CheckBox]) {
         self.init()
         
         for checkbox in checkBoxes {
@@ -80,13 +80,13 @@ public class BEMCheckBoxGroup: NSObject {
     }
     
     /** Tests whether the checkbox is in this group */
-    @objc public func contains(_ checkBox: BEMCheckBox) -> Bool {
+    @objc public func contains(_ checkBox: CheckBox) -> Bool {
         return checkBoxes.contains(checkBox)
     }
     
     /** Adds a check box to this group. Check boxes can only belong to a single group, adding to a group removes it from its current group.
      */
-    @objc public func addCheckBoxToGroup(_ checkBox: BEMCheckBox) {
+    @objc public func addCheckBoxToGroup(_ checkBox: CheckBox) {
         if checkBoxes.contains(checkBox) { return }
         
         if checkBox.group != nil {
@@ -100,7 +100,7 @@ public class BEMCheckBoxGroup: NSObject {
     }
     
     /** Removes a check box from this group. */
-    @objc public func removeCheckBoxFromGroup(_ checkBox: BEMCheckBox) {
+    @objc public func removeCheckBoxFromGroup(_ checkBox: CheckBox) {
         if !checkBoxes.contains(checkBox) {
             // Not in this group
             return
@@ -110,9 +110,9 @@ public class BEMCheckBoxGroup: NSObject {
         checkBox.group = nil
     }
     
-    // MARK: Private methods called by BEMCheckBox
+    // MARK: Private methods called by CheckBox
     
-    internal func notifyCheckBoxSelectionChanged(_ checkBox: BEMCheckBox) {
+    internal func notifyCheckBoxSelectionChanged(_ checkBox: CheckBox) {
         if checkBox.on {
             // Change selected checkbox to this one
             selectedCheckBox = checkBox

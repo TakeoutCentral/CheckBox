@@ -7,11 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <BEMCheckBox/BEMCheckBox-Swift.h>
+#import <CheckBox/CheckBox-Swift.h>
 
 @interface AnimationManangerTests : XCTestCase
 
-@property (strong, nonatomic) BEMAnimationManager *manager;
+@property (strong, nonatomic) AnimationManager *manager;
 
 @end
 
@@ -20,7 +20,7 @@
 - (void)setUp {
     [super setUp];
     
-    self.manager = [[BEMAnimationManager alloc] initWithAnimationDuration:10.0];
+    self.manager = [[AnimationManager alloc] initWithAnimationDuration:10.0];
 }
 
 - (void)testInit {
