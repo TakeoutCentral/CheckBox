@@ -253,7 +253,12 @@ public class CheckBox: UIControl, CAAnimationDelegate {
     @objc public func setOn(_ on: Bool, animated: Bool = false) {
         setOn(on, animated: animated, notifyGroup: false)
     }
-    
+
+    public override var isSelected: Bool {
+        get { _on }
+        set { setOn(newValue, animated: true) }
+    }
+
     // MARK: Gesture Recognizer
     @objc func handleTapCheckBox(_ recognizer: UITapGestureRecognizer?) {
         // If we have a group that requires a selection, and we're already selected, don't allow a deselection
