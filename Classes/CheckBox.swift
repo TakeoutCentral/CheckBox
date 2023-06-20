@@ -26,7 +26,6 @@ import UIKit
 }
 
 /** Tasteful Checkbox for iOS. */
-@IBDesignable
 @objc
 public class CheckBox: UIControl, CAAnimationDelegate {
     
@@ -67,12 +66,12 @@ public class CheckBox: UIControl, CAAnimationDelegate {
     /** The object that acts as the delegate of the receiving check box.
     * @discussion The delegate must adopt the \p CheckBoxDelegate protocol. The delegate is not retained.
      */
-    @objc @IBOutlet weak public var delegate: CheckBoxDelegate?
+    @objc weak public var delegate: CheckBoxDelegate?
     
     /** This property allows you to retrieve and set (without animation) a value determining whether the CheckBox object is On or Off.
       * Default to NO.
      */
-    @objc @IBInspectable public var on: Bool {
+    @objc public var on: Bool {
         get { return _on }
         set { self.setOn(newValue) }
     }
@@ -80,7 +79,7 @@ public class CheckBox: UIControl, CAAnimationDelegate {
     /** The type of box.
      * @see BoxType.
      */
-    @objc public var boxType: BoxType = .circle {
+    @objc public var boxType: BoxType = .square {
         didSet {
             pathManager.boxType = boxType
             setNeedsLayout()
@@ -88,7 +87,7 @@ public class CheckBox: UIControl, CAAnimationDelegate {
     }
     
     /** The width of the lines of the check mark and the box. Default to 2. */
-    @objc @IBInspectable public var lineWidth: CGFloat = 2.0 {
+    @objc public var lineWidth: CGFloat = 2.0 {
         didSet {
             pathManager.lineWidth = lineWidth
             setNeedsLayout()
@@ -96,7 +95,7 @@ public class CheckBox: UIControl, CAAnimationDelegate {
     }
     
     /** The corner radius which is applied to the box when the boxType is square. Default to 3.0. */
-    @objc @IBInspectable public var cornerRadius: CGFloat = 3.0 {
+    @objc public var cornerRadius: CGFloat = 3.0 {
         didSet {
             pathManager.cornerRadius = cornerRadius
             setNeedsLayout()
@@ -104,34 +103,34 @@ public class CheckBox: UIControl, CAAnimationDelegate {
     }
     
     /** The duration in seconds of the animation when the check box switches from on and off. Default to 0. */
-    @objc @IBInspectable public var animationDuration: CFTimeInterval = 0.5 {
+    @objc public var animationDuration: CFTimeInterval = 0.5 {
         didSet {
             animationManager.animationDuration = animationDuration
         }
     }
     
     /** BOOL to control if the box should be hidden or not. Defaults to NO. */
-    @objc @IBInspectable public var hideBox = false
+    @objc public var hideBox = false
     
     /** The color of the line around the box when it is On. */
-    @objc @IBInspectable public var onTintColor: UIColor? = UIColor(red: 0, green: 122.0 / 255.0, blue: 255 / 255, alpha: 1)
+    @objc public var onTintColor: UIColor? = UIColor(red: 0, green: 122.0 / 255.0, blue: 255 / 255, alpha: 1)
     
     /** The color of the inside of the box when it is On. */
-    @objc @IBInspectable public var onFillColor: UIColor? = UIColor.clear {
+    @objc public var onFillColor: UIColor? = UIColor.clear {
         didSet {
             setNeedsLayout()
         }
     }
     
     /** The color of the inside of the box when it is Off. */
-    @objc @IBInspectable public var offFillColor: UIColor? = UIColor.clear {
+    @objc public var offFillColor: UIColor? = UIColor.clear {
         didSet {
             setNeedsLayout()
         }
     }
     
     /** The color of the check mark when it is On. */
-    @objc @IBInspectable public var onCheckColor: UIColor? = UIColor(red: 0, green: 122.0 / 255.0, blue: 255 / 255, alpha: 1) {
+    @objc public var onCheckColor: UIColor? = .white {
         didSet {
             setNeedsLayout()
         }
@@ -170,16 +169,16 @@ public class CheckBox: UIControl, CAAnimationDelegate {
      * @warning Some animations might not look as intended if the different colors of the control are not appropriatly configured.
      * @see AnimationType.
      */
-    @objc public var onAnimationType: AnimationType = .stroke
-    
+    @objc public var onAnimationType: AnimationType = .fill
+
     /** The animation type when the check mark gets set to Off.
      * @warning Some animations might not look as intended if the different colors of the control are not appropriatly configured.
      * @see AnimationType.
      */
-    @objc public var offAnimationType: AnimationType = .stroke
+    @objc public var offAnimationType: AnimationType = .fill
     
     /** If the checkbox width or height is smaller than this value, the touch area will be increased. Allows for visually small checkboxes to still be easily tapped. Default: (44,  */
-    @objc @IBInspectable var minimumTouchSize = CGSize(width: 44, height: 44)
+    @objc var minimumTouchSize = CGSize(width: 44, height: 44)
     
     // MARK: Initialization
     
@@ -200,21 +199,17 @@ public class CheckBox: UIControl, CAAnimationDelegate {
 
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapCheckBox(_:))))
     }
-    
-    public override var frame: CGRect {
-        didSet {
-            pathManager.size = frame.height
-        }
-    }
 
     override public func layoutSubviews() {
+        super.layoutSubviews()
+        pathManager.size = frame.height
         self.setupLayers()
     }
 
     override public var intrinsicContentSize: CGSize {
-        return frame.size
+        CGSize(width: 22, height: 22)
     }
-    
+
     // MARK: Setters
     
     private var _on: Bool = false
@@ -256,7 +251,10 @@ public class CheckBox: UIControl, CAAnimationDelegate {
 
     public override var isSelected: Bool {
         get { _on }
-        set { setOn(newValue, animated: true) }
+        set {
+            super.isSelected = newValue
+            setOn(newValue, animated: true)
+        }
     }
 
     // MARK: Gesture Recognizer
